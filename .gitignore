@@ -1,0 +1,34 @@
+# ----------------------------------------------------------------------
+# 1. ARTEFATOS DE BUILD & DISTRIBUIÇÃO (Gerados Automaticamente)
+# ----------------------------------------------------------------------
+# Ignora a pasta final de upload para o GAS (achatada)
+/app/
+# Ignora o CSS compilado pelo Tailwind (geramos na hora do build)
+src/styles/output.css
+
+# ----------------------------------------------------------------------
+# 2. DEPENDÊNCIAS (Node.js)
+# ----------------------------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ----------------------------------------------------------------------
+# 3. SEGURANÇA & CLASP (Configurações Locais/Sensíveis)
+# ----------------------------------------------------------------------
+# Configuração local do Clasp (contém o Script ID específico do ambiente)
+.clasp.json
+# Credenciais globais do usuário
+.clasprc.json
+.clasprc.json.enc
+# Variáveis de ambiente
+.env
+
+# ----------------------------------------------------------------------
+# 4. SISTEMA OPERACIONAL & EDITOR
+# ----------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+*.tsbuildinfo

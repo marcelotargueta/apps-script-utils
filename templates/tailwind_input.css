@@ -1,0 +1,46 @@
+/*
+  File: src/styles/input.css (template)
+  Description: Configração central do tailwind CSS v4+
+  Nota: As fontes (ex: Montserrat), devem ser importadas no HTML (Component_HeadSetup).
+*/
+
+@import "tailwindcss";
+
+@theme {
+  /* --- TYPOGRAPHY --- */
+  --font-sans: "Montserrat", sans-serif;
+
+  /* --- BRAND PALETTE --- **/
+  /* Utilize nomes semânticos para facilitar mudanças de temas no futuro */
+  --color-primary: #13335a;
+  --color-secondary: #42b9eb;
+  --color-accent: #2a688f;
+
+  /* --- UI STATES --- */
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-error: #ef4444;
+
+  /* --- SRFACES --- */
+  --color-app-bg: #f8fafc;
+  --color-surface: #ffffff;
+
+  /* --- SHADOWS E EFFECTS --- */
+  --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --radius-box: 0.5rem;
+}
+
+/*
+  Camada Base:
+  Aqui você pode aplicar estilos globais que Tailwind não cobre,
+  ou forcar o reset de fontes.
+*/
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-primary);
+    background-color: var(--color-app-bg);
+  }
+}

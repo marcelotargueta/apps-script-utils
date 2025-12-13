@@ -1,0 +1,67 @@
+# DIRETRIZES DE FRONTEND & UI (TAILWIND v4 + SCRIPTLETS)
+
+**Contexto:**
+- **CSS:** Tailwind CSS v4 com Build Local.
+- **Config:** Variáveis definidas em `src/styles/input.css` (@theme).
+- **Engine:** Google Apps Script HtmlService.
+
+---
+
+### 1. REGRAS DO TAILWIND CSS v4 (CRÍTICO)
+
+A sintaxe de variáveis mudou. **Esqueça `var()` e colchetes.**
+
+1. **Definição (`src/styles/input.css`):**
+   Use o bloco `@theme` nativo.
+   ```css
+   @theme {
+     --color-primary: #13335a;
+     --font-sans: "Montserrat", sans-serif;
+     --shadow-card: 0 4px 6px rgba(0,0,0,0.1);
+   }
+  ```
+
+#### 1. Aplicação no HTML (Sintaxe Obrigatória):
+
+Use parênteses `-(...)` para injetar a variável do tema.
+
+- ✅ **CORRETO:** `bg-(--color-primary)`
+- ✅ **CORRETO:** `text-(--color-secondary)`
+- ✅ **CORRETO:** `font-(--font-sans)`
+- ❌ **ERRADO:** `bg-[var(--color-primary)]` ou `bg-primary` (se não for classe utilitária).
+
+
+### 2. REGRAS DE SCRIPTLETS & PROPS
+
+Utilizamos a função helper `include` que injeta dados no objeto `props`.
+
+1. **Acesso Seguro:**
+
+  Sempre acesse variáveis via `props.nomeDaVariavel`.
+
+  - ✅ `<?= props.title ?>`
+  - ⚠️ `<?= title ?>` (Evite para não poluir escopo global).
+
+2. **Tipos de Tags:**
+
+  - `<? ... ?>`: Lógica (IF/FOR). Não imprime nada.
+  - `<?= ... ?>`: Impressão com **Escape** (Texto seguro).
+  - `<?!= ... ?>`: Impressão **Raw** (HTML/Includes).
+
+#### Exemplo de Componente Perfeito:
+
+  ```Html
+  <!-- Component_Card.html -->
+  <div class="p-6 rounded-lg shadow-(--shadow-card) bg-(--color-app-bg)">
+
+    <h2 class="text-xl font-(--font-sans) text-(--color-primary)">
+        <?= props.title ?>
+    </h2>
+
+    <!-- Renderização Condicional -->
+    <? if (props.isActive) { ?>
+        <span class="text-(--color-success)">Ativo</span>
+    <? } ?>
+
+  </div>
+  ```
