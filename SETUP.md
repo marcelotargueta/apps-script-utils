@@ -57,6 +57,8 @@ Crie os arquivos essenciais na raiz do projeto.
     "target": "ESNext",
     "lib": ["ESNext"],
     "module": "None",
+    "rootDir": "./src",
+    "outDir": "./app",
     "moduleResolution": "Node",
     "strict": true,
     "noImplicitAny": true,
