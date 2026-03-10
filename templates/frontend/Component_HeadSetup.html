@@ -1,0 +1,49 @@
+<!--
+  File: Component_HeadSetup.html
+
+  Description: Defines the canonical <head> structure for Google Apps Script HTML applications.
+               This component centralizes mandatory runtime configuration and orchestrates
+               the inclusion of system-level and project-level head extensions via includes.
+
+  Description_pt: Define a estrutura canônica do <head> para aplicações HTML em Google Apps Script.
+                  Este componente centraliza configurações obrigatórias de runtime e orquestra
+                  a inclusão de extensões de head em nível de sistema e de projeto através de includes.
+-->
+
+<!--
+  GAS requires <base target="_top"> to ensure correct navigation
+  and avoid iframe-related issues.
+-->
+<base target="_top">
+
+<!--
+  Charset and viewport are mandatory for correct rendering
+  and responsive behavior inside GAS HTML service.
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--
+  OPTIONAL HEAD EXTENSIONS
+  ------------------------------------------------------------------
+  The includes below are intentional extension points.
+  They may or may not exist in a given project.
+
+  Projects are free to create, remove, or replace these components
+  without modifying this file.
+-->
+
+<?!= include('Component_Fonts'); ?>
+<?!= include('Component_Favicons'); ?>
+<?!= include('Component_Meta_Project'); ?>
+<?!= include('Component_Head_Extensions'); ?>
+
+<!--
+  TAILWIND CSS (INLINE BUILD)
+  ------------------------------------------------------------------
+  The 'Tailwind_CSS.html' file is generated automatically by the build pipeline
+  from the compiled Tailwind v4 output.
+
+  This file must NEVER be edited manually.
+-->
+<?!= include('Tailwind_CSS'); ?>

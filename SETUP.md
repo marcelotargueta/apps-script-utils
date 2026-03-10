@@ -2,7 +2,7 @@
 
 Este guia descreve o passo a passo para configurar um novo projeto utilizando a **Modern Stack** (TypeScript + Tailwind v4 + Build System) definida nos nossos padrões.
 
-> ⚠️ Este repositório (`apps-script-utils`) é **apenas de referência**. Não precisa ser clonado; copie apenas os arquivos ou trechos do códigos que forem úteis para seu projeto.
+> ⚠️ Este repositório (`apps-script-utils`) é **apenas de referência e infraestrutura**. Não precisa ser clonado; copie apenas os arquivos ou trechos do códigos que forem úteis para seu projeto.
 
 ---
 
@@ -13,7 +13,7 @@ Certifique-se de ter instalado:
 1. **Node.js** (v18+): `node -v`
 2. **VS Code:** Com extensão **ESLint** e **Tailwind CSS IntelliSense**.
 
-## 2️⃣ Inicialização do Projeto
+## 2️⃣ Inicialização e Dependências
 
 Abra o terminal na pasta onde deseja criar o projeto:
 
@@ -22,10 +22,10 @@ Abra o terminal na pasta onde deseja criar o projeto:
 mkdir meu-novo-projeto
 cd meu-novo-projeto
 
-# 2. Inicie o Node.js
+# 2. Inicie o Node.js (cria um package.json vazio inicial)
 npm init -y
 
-# 3. Instale as dependências (DevDependencies)
+# 3. Instale as dependências da stack (DevDependencies)
 npm install -D typescript @types/google-apps-script @google/clasp @tailwindcss/cli tailwindcss nodemon
 ```
 
@@ -33,69 +33,49 @@ npm install -D typescript @types/google-apps-script @google/clasp @tailwindcss/c
 
 Execute os comandos abaixo para criar a árvore de diretórios padrão.
 
-**Nota:** Adicionada a pasta `icons` para SVGs componentizados.
-
 ```Bash
 # Pastas Raiz e Fonte
 mkdir src
-mkdir src/backend
-mkdir src/backend/api src/backend/controllers src/backend/dao src/backend/models src/backend/utils
-mkdir src/frontend
-mkdir src/frontend/pages src/frontend/components src/frontend/icons
-mkdir src/styles
+mkdir src/backend src/backend/api src/backend/controllers src/backend/dao src/backend/utils
+mkdir src/frontend src/frontend/pages src/frontend/components src/frontend/scripts src/frontend/icons
+mkdir src/styles src/types
 ```
 
 ## 4️⃣ Arquivos de Configuração (Boilerplate)
 
-Crie os arquivos essenciais na raiz do projeto.
+Em vez de escrever configurações do zero, **copie os arquivos oficiais** do repositório `apps-script-utils` para a raiz do seu novo projeto:
 
-### 4.1 `tsconfig.json`
+1. `package.json` e `tsconfig.json`: Copie de `templates/config/` (lembre-se de remover o prefixo `template`. ao colar no novo projeto).
+2. **Sistema de Build:** Copie a pasta inteira `templates/build/` (que contém o `build-webapp.js` e o `build-auto.js`) para a raiz do projeto.
 
-```JSON
-{
-  "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["ESNext"],
-    "module": "None",
-    "rootDir": "./src",
-    "outDir": "./app",
-    "moduleResolution": "Node",
-    "strict": true,
-    "noImplicitAny": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
-  },
-  "include": ["src/**/*"]
-}
-```
+### 4.1 .gitignore Oficial (Obrigatório)
 
-### 4.2 `package.json` (Scripts)
+Crie o arquivo `.gitignore` na raiz com as regras estritas de segurança:
 
-Substitua a seção `"scripts"` do seu `package.json` por:
-
-```JSON
-"scripts": {
-  "css": "npx @tailwindcss/cli -i ./src/styles/input.css -o ./src/styles/output.css",
-  "css:watch": "npx @tailwindcss/cli -i ./src/styles/input.css -o ./src/styles/output.css --watch",
-  "build": "npm run css && node build.js",
-  "push": "npm run build && npx clasp push --force",
-  "dev": "npx nodemon --watch src -e ts,html,json,css --exec \"npm run push\""
-}
-```
-
-### 4.3 `build.js`
-
-Copie o script de build oficial (localizado em `apps-script-utils/build.js`) para a raiz deste novo projeto.
-
-### 4.4 `.gitignore`
-
-```Text
+```Plaintext
+# Dependências
 node_modules/
+
+# Artefatos de Build (Achatamento do GAS)
 app/
 src/styles/output.css
+
+# Segurança CLASP & Credenciais (CRÍTICO: Nunca comite)
 .clasp.json
+.google_creds.json
+creds.json
+
+# Sistema e Logs
+.DS_Store
+Thumbs.db
+*.log
+.ai_context/
+
+# Segredos Legados (Se ainda não migrou para o Utils_Env)
+src/backend/config/Config_Ids.ts
 ```
+
+_(Nota: O `package.json` e `tsconfig.json` DEVEM ser commitados para garantir a reprodutibilidade do ambiente em outras máquinas)._
 
 ## 5️⃣ Configuração do Tailwind CSS
 
@@ -145,27 +125,41 @@ Abra o arquivo `.clasp.json` criado e altere o `rootDir` para apontar para a pas
 }
 ```
 
-## 7️⃣ Arquivos Core (Obrigatórios)
+## 7️⃣ Arquivos Core da Arquitetura (Aceleradores)
 
-Para o projeto rodar, você precisa copiar 2 arquivos base do `apps-script-utils`:
+Para o projeto herdar os superpoderes da stack, copie os seguintes utilitários do `apps-script-utils`:
 
-1. `src/backend/api/Server_Main.ts`: Contém `doGet` e `include`.
-2. `src/frontend/components/Component_HeadSetup.html`: Contém a injeção do Tailwind.
+1. **Frontend:** `Component_HeadSetup.html` (Injeção do CSS) e `Script_RPC.html` (Envelopador async/await).
+2. **Backend:** `Server_Main.ts` (Entry point de rotas) e `Utils_Env.ts` (O Cofre Tipado para IDs).
 
-## 8️⃣ Fluxo de Trabalho (Workflow)
+## 8️⃣ Fluxo de Trabalho (Workflow Automatizado)
 
-Agora tudo está pronto.
+A stack utiliza o conceito de **Dual Build**. Escolha o comando baseado na natureza do seu projeto:
 
-1. **Desenvolver:**
+### 🌐 Para Projetos Web (HTML/CSS + Backend)
 
-   Rodar o comando abaixo. Ele vai monitorar seus arquivos TS/HTML/CSS, compilar tudo, gerar o CSS e fazer upload automático a cada salvamento.
+**Desenvolvimento (Monitoramento e Upload Automático):**
 
 ```Bash
-npm run dev
+npm run dev:web
 ```
 
-2. **Deploy Manual:**
+**Deploy Manual (Apenas Build e Push):**
 
 ```Bash
-npm run push
+npm run push:web
+```
+
+### ⚙️ Para Projetos de Automação (Apenas Backend / Headless)
+
+**Desenvolvimento (Monitoramento e Upload Automático):**
+
+```Bash
+npm run dev:auto
+```
+
+**Deploy Manual (Apenas Build e Push):**
+
+```Bash
+npm run push:auto
 ```
