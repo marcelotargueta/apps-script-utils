@@ -1,0 +1,54 @@
+<!-- 
+  File: src/frontend/services/Service_RPC.html
+
+  Description: Modern wrapper for google.script.run using Promises.
+               Foundational network utility for the Service layer.
+
+  Description_pt: Envelopador moderno para google.script.run utilizando Promises.
+                  Utilitário de rede fundamental para a camada de Serviço.
+-->
+
+<script>
+    /**
+     * @namespace RPC
+     * @description Modern wrapper for google.script.run using Promises.
+     * @description_pt Envelopador moderno para google.script.run utilizando Promises.
+     * @example
+     * // Usage example / Exemplo de uso:
+     * try {
+     * const user = await RPC.call('API_GetUserData', email);
+     * console.log(user);
+     * } catch (error) {
+     * console.error("Backend error:", error);
+     * }
+     */
+    const RPC = {
+        /**
+         * @description Calls a backend Apps Script function dynamically.
+         * @param {string} functionName - The exact name of the server-side function.
+         * @param {...any} args - Any arguments to pass to the server function.
+         * @returns {Promise<any>} Resolves with the server response or rejects with an error.
+         * @description_pt Chama dinamicamente uma função de backend do Apps Script.
+         * @param_pt {string} functionName - O nome exato da função no lado do servidor.
+         * @param_pt {...any} args - Quaisquer argumentos para passar para a função do servidor.
+         * @returns_pt {Promise<any>} Resolve com a resposta do servidor ou rejeita com um erro.
+         */
+        call: function (functionName, ...args) {
+            return new Promise((resolve, reject) => {
+
+                if (!google || !google.script || !google.script.run) {
+                    return reject(new Error("google.script.run is not available in this environment."));
+                }
+
+                if (typeof google.script.run[functionName] !== 'function') {
+                    return reject(new Error(`Backend function '${functionName}' not found.`));
+                }
+
+                google.script.run
+                    .withSuccessHandler((result) => resolve(result))
+                    .withFailureHandler((error) => reject(error))
+                [functionName](...args);
+            });
+        }
+    };
+</script>
