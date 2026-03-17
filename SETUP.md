@@ -36,9 +36,9 @@ Execute os comandos abaixo para criar a árvore de diretórios padrão.
 ```Bash
 # Pastas Raiz e Fonte
 mkdir src
-mkdir src/backend src/backend/api src/backend/controllers src/backend/dao src/backend/utils
-mkdir src/frontend src/frontend/pages src/frontend/components src/frontend/scripts src/frontend/icons
-mkdir src/styles src/types
+mkdir src/backend, src/backend/api, src/backend/controllers, src/backend/dao, src/backend/utils
+mkdir src/frontend, src/frontend/pages, src/frontend/components, src/frontend/store, src/frontend/services, src/frontend/ui, src/frontend/icons
+mkdir src/styles, src/types
 ```
 
 ## 4️⃣ Arquivos de Configuração (Boilerplate)
