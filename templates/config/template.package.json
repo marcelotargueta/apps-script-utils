@@ -5,8 +5,8 @@
   "scripts": {
     "css": "npx @tailwindcss/cli -i ./src/styles/input.css -o ./src/styles/output.css",
     "css:watch": "npx @tailwindcss/cli -i ./src/styles/input.css -o ./src/styles/output.css --watch",
-    "build:web": "npm run css && node templates/build/build-webapp.js",
-    "build:auto": "node templates/build/build-auto.js",
+    "build:web": "npm run css && node ./build/build-webapp.js",
+    "build:auto": "node ./build/build-auto.js",
     "push:web": "npm run build:web && npx clasp push --force",
     "push:auto": "npm run build:auto && npx clasp push --force",
     "dev:web": "npx nodemon --watch src -e ts,html,json,css --exec \"npm run push:web\"",
