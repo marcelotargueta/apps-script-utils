@@ -1,6 +1,7 @@
 {
   "name": "gas-enterprise-stack",
   "version": "1.0.0",
+  "private": true,
   "description": "Zero Gambiarras: Professional Google Apps Script Stack",
   "scripts": {
     "css": "npx @tailwindcss/cli -i ./src/styles/input.css -o ./src/styles/output.css",

@@ -39,6 +39,7 @@ mkdir src
 mkdir src/backend, src/backend/api, src/backend/controllers, src/backend/dao, src/backend/utils
 mkdir src/frontend, src/frontend/pages, src/frontend/components, src/frontend/store, src/frontend/services, src/frontend/ui, src/frontend/icons
 mkdir src/styles, src/types
+mkdir app
 ```
 
 ## 4️⃣ Arquivos de Configuração (Boilerplate)

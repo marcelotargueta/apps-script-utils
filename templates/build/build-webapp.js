@@ -6,7 +6,7 @@
  *              structure, and injecting compiled Tailwind CSS as an inline HTML component
  *              compatible with GAS runtime.
  *
- * Responsibilities:
+ * * Responsibilities:
  * - Acts as the single source of truth for the build process
  * - Ensures GAS-compatible output (flat structure, no bundlers)
  * - Keeps frontend (HTML/CSS) and backend (TS) pipelines deterministic
@@ -22,7 +22,7 @@
  *                 o CSS compilado do Tailwind como um componente HTML inline compatível com
  *                 o runtime do GAS.
  *
- * Responsabilidades:
+ * * Responsabilidades:
  * - Atua como a única fonte de verdade para o processo de build
  * - Garante saída compatível com GAS (estrutura achatada, sem bundlers)
  * - Mantém os pipelines de frontend (HTML/CSS) e backend (TS) determinísticos
