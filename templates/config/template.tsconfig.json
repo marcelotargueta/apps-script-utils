@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "target": "ESNext",
     "module": "None",
     "lib": ["ESNext"],
@@ -9,7 +10,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["@types/google-apps-script"]
+    "types": ["google-apps-script"]
   },
   "include": ["src/**/*"]
 }
