@@ -28,12 +28,12 @@ Para entender a nomenclatura, estrutura de arquivos, onde salvar ícones e como 
 ### 3. 🤖 Inteligência Artificial
 
 Para instanciar o "Consultor Sênior" na sua IA favorita, copie o Prompt Mestre:
-👉 [![](https://img.shields.io/badge/Copie_o_prompt__start.txt-blueviolet.svg)](./prompts/prompt_start.txt)
+👉 [![](https://img.shields.io/badge/Copie_o_prompt__start.txt-blueviolet.svg)](./prompts/prompt_start.md)
 
 ### 4. 🎨 Regras de UI (Opcional)
 
 Se precisar de ajuda específica com sintaxe do Tailwind v4 ou Scriptlets:
-👉 [![](https://img.shields.io/badge/Copie_o_prompt__ui__rules.txt-blueviolet.svg)](./prompts/prompt_ui_rules.txt)
+👉 [![](https://img.shields.io/badge/Copie_o_prompt__ui__rules.txt-blueviolet.svg)](./prompts/prompt_ui_rules.md)
 
 ---
 
