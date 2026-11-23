@@ -1,0 +1,14 @@
+/*
+  File:           src/styles/input.css
+  Description:    Style source of the app: theme tokens and component classes, compiled by Tailwind v4.
+  Description_pt: Fonte do estilo da aplicação: tokens de tema e classes de componente, compilados pelo Tailwind v4.
+*/
+
+@import "tailwindcss";
+
+@theme {
+  /* PROJECT: theme tokens of this app */
+}
+
+@layer components {
+}

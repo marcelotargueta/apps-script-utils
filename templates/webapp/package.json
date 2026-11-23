@@ -1,0 +1,19 @@
+{
+  "name": "{{MACHINE_NAME}}",
+  "private": true,
+  "scripts": {
+    "css": "npx @tailwindcss/cli -i ./src/styles/input.css -o ./src/styles/output.css",
+    "css:watch": "npx @tailwindcss/cli -i ./src/styles/input.css -o ./src/styles/output.css --watch",
+    "build": "npm run css && node ./build/build-webapp.js",
+    "push": "npm run build && npx clasp push --force",
+    "dev": "npx nodemon --watch src --ignore src/styles/output.css -e ts,html,json,css --exec \"npm run push\""
+  },
+  "devDependencies": {
+    "@google/clasp": "3.4.1",
+    "@tailwindcss/cli": "4.3.5",
+    "@types/google-apps-script": "2.0.15",
+    "nodemon": "3.1.14",
+    "tailwindcss": "4.3.5",
+    "typescript": "7.0.2"
+  }
+}

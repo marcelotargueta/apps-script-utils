@@ -1,0 +1,44 @@
+<!--
+  File:           src/frontend/services/Service_RPC.html
+  Description:    Client transport: calls a server function by name and turns its response envelope into a Promise.
+  Description_pt: Transporte do cliente: chama uma função do servidor pelo nome e transforma o envelope de resposta numa Promise.
+-->
+
+<script>
+    const RPC = {
+        /**
+         * @description Calls an exposed server function by name. Resolves with the envelope data and rejects
+         *              with an Error whose message is the error code.
+         * @param {string} functionName - Name of the exposed server function.
+         * @param {...unknown} args - Arguments passed, in order, to the server function.
+         * @returns {Promise<unknown>} The envelope data.
+         *
+         * @description_pt Chama pelo nome uma função exposta do servidor. Resolve com o data do envelope e rejeita
+         *                 com um Error cuja mensagem é o código de erro.
+         * @param_pt {string} functionName - Nome da função exposta do servidor.
+         * @param_pt {...unknown} args - Argumentos passados, em ordem, à função do servidor.
+         * @returns_pt {Promise<unknown>} O data do envelope.
+         */
+        call(functionName, ...args) {
+            return new Promise((resolve, reject) => {
+                const fail = (detail) => {
+                    console.error(`[RPC] ${functionName}:`, detail);
+                    reject(new Error("UNEXPECTED_ERROR"));
+                };
+                google.script.run
+                    .withSuccessHandler((response) => {
+                        if (response?.success) {
+                            resolve(response.data);
+                        } else if (response?.errorCode) {
+                            reject(new Error(response.errorCode));
+                        } else {
+                            // A response outside the envelope would otherwise leave the Promise pending forever.
+                            fail(response);
+                        }
+                    })
+                    .withFailureHandler(fail)
+                [functionName](...args);
+            });
+        }
+    };
+</script>

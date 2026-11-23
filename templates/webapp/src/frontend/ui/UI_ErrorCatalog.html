@@ -1,0 +1,28 @@
+<!--
+  File:           src/frontend/ui/UI_ErrorCatalog.html
+  Description:    Error catalog: translates each error code into the message shown to the user.
+  Description_pt: Catálogo de erro: traduz cada código de erro na frase mostrada ao usuário.
+-->
+
+<script>
+    const GENERIC_ERROR_MESSAGE = "Não foi possível concluir a operação. Tente novamente.";
+
+    const ERROR_MESSAGES = new Map([
+        // PROJECT: one entry for each response error code in the CONTRACT
+    ]);
+
+    /**
+     * @description Translates an error code into the message shown to the user. A code without an entry
+     *              resolves to the generic message.
+     * @param {string} code - Error code, read from error.message.
+     * @returns {string} Message shown to the user.
+     *
+     * @description_pt Traduz um código de erro na frase mostrada ao usuário. Código sem entrada resolve para
+     *                 a frase genérica.
+     * @param_pt {string} code - Código de erro, lido de error.message.
+     * @returns_pt {string} Frase mostrada ao usuário.
+     */
+    function ui_translateErrorCode(code) {
+        return ERROR_MESSAGES.get(code) ?? GENERIC_ERROR_MESSAGE;
+    }
+</script>

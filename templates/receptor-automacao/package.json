@@ -1,0 +1,15 @@
+{
+  "name": "{{MACHINE_NAME}}",
+  "private": true,
+  "scripts": {
+    "build": "node ./build/build-auto.js",
+    "push": "npm run build && npx clasp push --force",
+    "dev": "npx nodemon --watch src -e ts,json --exec \"npm run push\""
+  },
+  "devDependencies": {
+    "@google/clasp": "3.4.1",
+    "@types/google-apps-script": "2.0.15",
+    "nodemon": "3.1.14",
+    "typescript": "7.0.2"
+  }
+}

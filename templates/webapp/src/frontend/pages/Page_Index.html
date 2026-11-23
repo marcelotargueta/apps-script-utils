@@ -1,0 +1,25 @@
+<!--
+  File:           src/frontend/pages/Page_Index.html
+  Description:    Root page of the app: opens the document and composes the shell and the scripts.
+  Description_pt: Página raiz da aplicação: abre o documento e compõe a casca e os scripts.
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <?!= include("Component_HeadSetup") ?>
+</head>
+<!-- PROJECT: utility classes of the body -->
+
+<body class="">
+    <!-- PROJECT: shell of this app: a single main and, as needed, header, nav, aside and footer, with their components -->
+
+    <?!= include("Store_App", props) ?>
+    <?!= include("Service_RPC") ?>
+    <!-- PROJECT: Service_<Name> includes of this app -->
+    <?!= include("UI_ErrorCatalog") ?>
+    <!-- PROJECT: UI_<Name> includes of this app -->
+    <?!= include("UI_Init") ?>
+</body>
+
+</html>
